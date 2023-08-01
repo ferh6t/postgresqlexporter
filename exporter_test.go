@@ -24,10 +24,10 @@ func TestLoggingMetricsExporterNoErrors(t *testing.T) {
 	assert.NoError(t, err)
 
 	assert.NoError(t, lme.ConsumeMetrics(context.Background(), pmetric.NewMetrics()))
-	assert.NoError(t, lme.ConsumeMetrics(context.Background(), testdata.GenerateMetricsAllTypes()))
-	assert.NoError(t, lme.ConsumeMetrics(context.Background(), testdata.GenerateMetricsAllTypesEmpty()))
-	assert.NoError(t, lme.ConsumeMetrics(context.Background(), testdata.GenerateMetricsMetricTypeInvalid()))
-	assert.NoError(t, lme.ConsumeMetrics(context.Background(), testdata.GenerateMetrics(10)))
+	assert.NoError(t, lme.ConsumeMetrics(context.Background(), test.GenerateMetricsAllTypes()))
+	assert.NoError(t, lme.ConsumeMetrics(context.Background(), test.GenerateMetricsAllTypesEmpty()))
+	assert.NoError(t, lme.ConsumeMetrics(context.Background(), test.GenerateMetricsMetricTypeInvalid()))
+	assert.NoError(t, lme.ConsumeMetrics(context.Background(), test.GenerateMetrics(10)))
 
 	// assert.NoError(t, lme.Shutdown(context.Background()))
 }

@@ -9,9 +9,7 @@ import (
 	"strconv"
 
 	"go.opentelemetry.io/collector/component"
-	"go.opentelemetry.io/collector/pdata/plog"
 	"go.opentelemetry.io/collector/pdata/pmetric"
-	"go.opentelemetry.io/collector/pdata/ptrace"
 )
 
 type postgresqlExporter struct {
@@ -27,14 +25,15 @@ func (e postgresqlExporter) shutdown(_ context.Context) error {
 }
 
 func (e postgresqlExporter) consumeMetrics(_ context.Context, metric pmetric.Metrics) error {
-	fmt.Printf(strconv.Itoa(metric.MetricCount()))
+	fmt.Printf(strconv.Itoa(metric.MetricCount()) + "/n")
 	return nil
 }
 
-func (e postgresqlExporter) consumeTraces(_ context.Context, _ ptrace.Traces) error {
-	return nil
-}
+// if necessary they will be implemeted
+// func (e postgresqlExporter) consumeTraces(_ context.Context, _ ptrace.Traces) error {
+// 	return nil
+// }
 
-func (e postgresqlExporter) consumeLogs(_ context.Context, _ plog.Logs) error {
-	return nil
-}
+// func (e postgresqlExporter) consumeLogs(_ context.Context, _ plog.Logs) error {
+// 	return nil
+// }
