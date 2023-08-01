@@ -19,15 +19,15 @@ type Config struct {
 func NewFactory() exporter.Factory {
 	return exporter.NewFactory(
 		"postgresqlexporter",
-		createDefaultConfig,
-		exporter.WithMetrics(createMetricsExporter, component.StabilityLevelDevelopment))
+		CreateDefaultConfig,
+		exporter.WithMetrics(CreateMetricsExporter, component.StabilityLevelDevelopment))
 }
 
-func createDefaultConfig() component.Config {
+func CreateDefaultConfig() component.Config {
 	return &Config{}
 }
 
-func createMetricsExporter(
+func CreateMetricsExporter(
 	ctx context.Context,
 	set exporter.CreateSettings,
 	cfg component.Config,

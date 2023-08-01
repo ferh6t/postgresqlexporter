@@ -6,6 +6,7 @@ package postgresqlexporter
 import (
 	"context"
 	"fmt"
+	"strconv"
 
 	"go.opentelemetry.io/collector/component"
 	"go.opentelemetry.io/collector/pdata/plog"
@@ -26,7 +27,7 @@ func (e postgresqlExporter) shutdown(_ context.Context) error {
 }
 
 func (e postgresqlExporter) consumeMetrics(_ context.Context, metric pmetric.Metrics) error {
-	fmt.Printf(metric)
+	fmt.Printf(strconv.Itoa(metric.MetricCount()))
 	return nil
 }
 
