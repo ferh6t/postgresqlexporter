@@ -4,4 +4,4 @@
 //go:generate mdatagen metadata.yaml
 
 // Package posgtgresqlexporter implements an exporter that writes data to Parquet files.
-package posgtgresqlexporter
+package postgresqlexporter
