@@ -1,4 +1,4 @@
-module github.com/ferh6t/posgtgresqlexporter
+module github.com/ferh6t/postgresqlexporter
 
 go 1.20
 
