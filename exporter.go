@@ -1,10 +1,11 @@
 // Copyright The OpenTelemetry Authors
 // SPDX-License-Identifier: Apache-2.0
 
-package myapiserver // import "github.com/open-telemetry/opentelemetry-collector-contrib/exporter/parquetexporter"
+package posgtgresqlexporter
 
 import (
 	"context"
+	"fmt"
 
 	"go.opentelemetry.io/collector/component"
 	"go.opentelemetry.io/collector/pdata/plog"
@@ -25,7 +26,7 @@ func (e postgresqlExporter) shutdown(_ context.Context) error {
 }
 
 func (e postgresqlExporter) consumeMetrics(_ context.Context, metric pmetric.Metrics) error {
-
+	fmt.Printf(metric)
 	return nil
 }
 

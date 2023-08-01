@@ -1,9 +1,8 @@
-module github.com/ferh6t/myapiserver
+module github.com/ferh6t/posgtgresqlexporter
 
 go 1.20
 
 require (
-	github.com/open-telemetry/opentelemetry-collector-contrib/exporter/parquetexporter v0.82.0
 	go.opentelemetry.io/collector/component v0.82.0
 	go.opentelemetry.io/collector/exporter v0.82.0
 	go.opentelemetry.io/collector/pdata v1.0.0-rcv0014

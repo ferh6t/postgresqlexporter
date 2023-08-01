@@ -1,7 +1,7 @@
 // Copyright The OpenTelemetry Authors
 // SPDX-License-Identifier: Apache-2.0
 
-package myapiserver // import "github.com/open-telemetry/opentelemetry-collector-contrib/exporter/parquetexporter"
+package posgtgresqlexporter
 
 import (
 	"context"
@@ -18,7 +18,7 @@ type Config struct {
 // NewFactory creates a factory for the Parquet exporter.
 func NewFactory() exporter.Factory {
 	return exporter.NewFactory(
-		"myapiserver",
+		"posgtgresqlexporter",
 		createDefaultConfig,
 		exporter.WithMetrics(createMetricsExporter, component.StabilityLevelDevelopment))
 }

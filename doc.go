@@ -3,5 +3,5 @@
 
 //go:generate mdatagen metadata.yaml
 
-// Package parquetexporter implements an exporter that writes data to Parquet files.
-package myapiserver // import "github.com/open-telemetry/opentelemetry-collector-contrib/exporter/parquetexporter"
+// Package posgtgresqlexporter implements an exporter that writes data to Parquet files.
+package posgtgresqlexporter
