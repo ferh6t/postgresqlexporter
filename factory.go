@@ -15,7 +15,6 @@ type Config struct {
 	Path string `mapstructure:"path"`
 }
 
-// NewFactory creates a factory for the Parquet exporter.
 func NewFactory() exporter.Factory {
 	return exporter.NewFactory(
 		"postgresqlexporter",
@@ -24,7 +23,11 @@ func NewFactory() exporter.Factory {
 }
 
 func CreateDefaultConfig() component.Config {
-	return &Config{}
+	qs := exporterhelper.NewDefaultQueueSettings()
+	qs.Enabled = false
+	return &Config{
+		Endpoints: "my_end_points",
+	}
 }
 
 func CreateMetricsExporter(
@@ -32,13 +35,14 @@ func CreateMetricsExporter(
 	set exporter.CreateSettings,
 	cfg component.Config,
 ) (exporter.Metrics, error) {
-	fe := &postgresqlExporter{path: cfg.(*Config).Path}
+	cf := cfg.(*Config)
+	exporter := NewPostgreSqlExporter(cf)
 	return exporterhelper.NewMetricsExporter(
 		ctx,
 		set,
 		cfg,
-		fe.consumeMetrics,
-		exporterhelper.WithStart(fe.start),
-		exporterhelper.WithShutdown(fe.shutdown),
+		exporter.consumeMetrics,
+		exporterhelper.WithStart(exporter.Start),
+		exporterhelper.WithShutdown(exporter.Shutdown),
 	)
 }

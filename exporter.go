@@ -5,27 +5,37 @@ package postgresqlexporter
 
 import (
 	"context"
-	"fmt"
-	"strconv"
 
 	"go.opentelemetry.io/collector/component"
 	"go.opentelemetry.io/collector/pdata/pmetric"
 )
 
 type postgresqlExporter struct {
-	path string
+	path   string
+	writer *writerToPostgresql
 }
 
-func (e postgresqlExporter) start(_ context.Context, _ component.Host) error {
+func NewPostgreSqlExporter(cfg *Config) *postgresqlExporter {
+	return &postgresqlExporter{
+		writer: newWriter(),
+	}
+}
+
+func (e postgresqlExporter) Start(_ context.Context, _ component.Host) (err error) {
 	return nil
 }
 
-func (e postgresqlExporter) shutdown(_ context.Context) error {
+func (e postgresqlExporter) Shutdown(_ context.Context) error {
 	return nil
 }
 
-func (e postgresqlExporter) consumeMetrics(_ context.Context, metric pmetric.Metrics) error {
-	fmt.Printf(strconv.Itoa(metric.MetricCount()) + "/n")
+func (e postgresqlExporter) consumeMetrics(ctx context.Context, metric pmetric.Metrics, cfg component.Config) error {
+
+	for i := 0; i < metric.ResourceMetrics().Len(); i++ {
+		resourceMetrics := metric.ResourceMetrics().At(i)
+		e.writer.WriteToDataBase(resourceMetrics)
+	}
+
 	return nil
 }
 
