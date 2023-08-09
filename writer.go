@@ -18,8 +18,15 @@ type writerToPostgresql struct {
 	conn *conn
 }
 
-func newWriter() *writerToPostgresql {
-	conn := InitDatabase()
+func newWriter(cfg *Config) *writerToPostgresql {
+	default_link := "host=localhost user=your_username password=your_password  dbname=your_database_name  port=5432  sslmode=disable"
+	var conn *conn
+	if cfg.Endpoint != "" {
+		conn = InitDatabase(cfg.Endpoint)
+	} else {
+		conn = InitDatabase(default_link)
+	}
+
 	return &writerToPostgresql{
 		conn: conn,
 	}

@@ -17,7 +17,7 @@ type postgresqlExporter struct {
 
 func NewPostgreSqlExporter(cfg *Config) *postgresqlExporter {
 	return &postgresqlExporter{
-		writer: newWriter(),
+		writer: newWriter(cfg),
 	}
 }
 
@@ -29,7 +29,7 @@ func (e postgresqlExporter) Shutdown(_ context.Context) error {
 	return nil
 }
 
-func (e postgresqlExporter) consumeMetrics(ctx context.Context, metric pmetric.Metrics, cfg component.Config) error {
+func (e postgresqlExporter) consumeMetrics(ctx context.Context, metric pmetric.Metrics) error {
 
 	for i := 0; i < metric.ResourceMetrics().Len(); i++ {
 		resourceMetrics := metric.ResourceMetrics().At(i)

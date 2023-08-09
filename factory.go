@@ -11,10 +11,6 @@ import (
 	"go.opentelemetry.io/collector/exporter/exporterhelper"
 )
 
-type Config struct {
-	Path string `mapstructure:"path"`
-}
-
 func NewFactory() exporter.Factory {
 	return exporter.NewFactory(
 		"postgresqlexporter",
@@ -25,9 +21,7 @@ func NewFactory() exporter.Factory {
 func CreateDefaultConfig() component.Config {
 	qs := exporterhelper.NewDefaultQueueSettings()
 	qs.Enabled = false
-	return &Config{
-		Endpoints: "my_end_points",
-	}
+	return &Config{}
 }
 
 func CreateMetricsExporter(

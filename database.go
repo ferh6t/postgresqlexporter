@@ -11,8 +11,9 @@ type conn struct {
 	db *gorm.DB
 }
 
-func InitDatabase(host string, user string, password string, dbname string, port string, sslmode string) *conn {
-	dsn := "host=localhost" + host + " user=" + user + " password=" + password + " dbname=" + dbname + " port=" + port + " sslmode=" + sslmode
+func InitDatabase(link string) *conn {
+	dsn := link
+	// dsn := "host=localhost" + host + " user=" + user + " password=" + password + " dbname=" + dbname + " port=" + port + " sslmode=" + sslmode
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database")
